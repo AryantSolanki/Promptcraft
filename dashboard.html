@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWear Dashboard | Your Sustainable Fashion Hub</title>
+    <meta name="description" content="Manage your ReWear profile, track your swaps, and monitor your sustainable fashion impact.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link href="styles.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-stone-50 via-amber-50 to-green-50">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-white/95 backdrop-blur-xl border-bottom border-gray-200/50 z-50" id="mainNavbar">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="brand-icon me-3">
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">ReWear</span>
+                    <span class="brand-tagline">Sustainable Fashion</span>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-4" href="index.html">
+                            <i class="fas fa-home me-2"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-4 active" href="#dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-4" href="add-item.html">
+                            <i class="fas fa-plus me-2"></i>Add Item
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-4" href="#explore">
+                            <i class="fas fa-search me-2"></i>Explore
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold px-4" href="#swaps">
+                            <i class="fas fa-exchange-alt me-2"></i>Swaps
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                            <div class="user-avatar me-2">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="User Avatar" class="rounded-circle">
+                            </div>
+                            <span class="fw-semibold">Sarah Johnson</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#profile"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#settings"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container pt-5 mt-5">
+        <div class="container-fluid px-4">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header mb-5" data-aos="fade-down">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="dashboard-title mb-2">Welcome back, Sarah! 👋</h1>
+                        <p class="dashboard-subtitle text-muted">Track your sustainable fashion journey and manage your swaps</p>
+                    </div>
+                    <div class="col-lg-4 text-end">
+                        <div class="quick-actions">
+                            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#uploadItemModal">
+                                <i class="fas fa-plus me-2"></i>Upload Item
+                            </button>
+                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#findSwapModal">
+                                <i class="fas fa-search me-2"></i>Find Swap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="row mb-5" data-aos="fade-up">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card-dashboard">
+                        <div class="stat-icon bg-primary-gradient">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">2,450</h3>
+                            <p class="stat-label">Points Balance</p>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> +150 this week
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card-dashboard">
+                        <div class="stat-icon bg-success-gradient">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">12</h3>
+                            <p class="stat-label">Active Items</p>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> +3 this month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card-dashboard">
+                        <div class="stat-icon bg-warning-gradient">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">8</h3>
+                            <p class="stat-label">Ongoing Swaps</p>
+                            <div class="stat-change neutral">
+                                <i class="fas fa-minus"></i> No change
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-card-dashboard">
+                        <div class="stat-icon bg-info-gradient">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">24</h3>
+                            <p class="stat-label">CO₂ Saved (kg)</p>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> +2.5 this week
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Content -->
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+                    <!-- Profile Section -->
+                    <div class="dashboard-section mb-5" data-aos="fade-up">
+                        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="section-title">Profile Details</h2>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                <i class="fas fa-edit me-2"></i>Edit Profile
+                            </button>
+                        </div>
+                        <div class="profile-card">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="profile-avatar mb-3">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" alt="Profile Avatar" class="rounded-circle">
+                                        <div class="avatar-badge">
+                                            <i class="fas fa-crown"></i>
+                                        </div>
+                                    </div>
+                                    <h4 class="profile-name">Sarah Johnson</h4>
+                                    <p class="profile-level text-success">Eco Warrior</p>
+                                    <div class="profile-rating">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <span class="ms-2">5.0 (127 reviews)</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="profile-details">
+                                        <div class="detail-row">
+                                            <span class="detail-label"><i class="fas fa-envelope me-2"></i>Email:</span>
+                                            <span class="detail-value">sarah.johnson@email.com</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label"><i class="fas fa-map-marker-alt me-2"></i>Location:</span>
+                                            <span class="detail-value">San Francisco, CA</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label"><i class="fas fa-calendar me-2"></i>Member Since:</span>
+                                            <span class="detail-value">March 2023</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label"><i class="fas fa-recycle me-2"></i>Total Swaps:</span>
+                                            <span class="detail-value">47 successful swaps</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label"><i class="fas fa-award me-2"></i>Achievements:</span>
+                                            <span class="detail-value">
+                                                <span class="badge bg-success me-1">First Swap</span>
+                                                <span class="badge bg-primary me-1">Eco Warrior</span>
+                                                <span class="badge bg-warning">Top Swapper</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Uploaded Items Overview -->
+                    <div class="dashboard-section mb-5" data-aos="fade-up">
+                        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="section-title">My Items</h2>
+                            <div class="section-actions">
+                                <button class="btn btn-outline-secondary btn-sm me-2" id="viewAllItems">
+                                    <i class="fas fa-list me-2"></i>View All
+                                </button>
+                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadItemModal">
+                                    <i class="fas fa-plus me-2"></i>Add Item
+                                </button>
+                            </div>
+                        </div>
+                        <div class="items-grid">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="item-card-dashboard">
+                                        <div class="item-image">
+                                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300&h=200&fit=crop" alt="Vintage Denim Jacket">
+                                            <div class="item-status active">Active</div>
+                                        </div>
+                                        <div class="item-content">
+                                            <h5 class="item-title">Vintage Denim Jacket</h5>
+                                            <p class="item-description">Classic 90s denim jacket in excellent condition</p>
+                                            <div class="item-meta">
+                                                <span class="item-points"><i class="fas fa-coins me-1"></i>450 points</span>
+                                                <span class="item-views"><i class="fas fa-eye me-1"></i>23 views</span>
+                                            </div>
+                                            <div class="item-actions">
+                                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="item-card-dashboard">
+                                        <div class="item-image">
+                                            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=200&fit=crop" alt="Summer Dress">
+                                            <div class="item-status pending">Pending</div>
+                                        </div>
+                                        <div class="item-content">
+                                            <h5 class="item-title">Floral Summer Dress</h5>
+                                            <p class="item-description">Light and breezy summer dress with floral pattern</p>
+                                            <div class="item-meta">
+                                                <span class="item-points"><i class="fas fa-coins me-1"></i>320 points</span>
+                                                <span class="item-views"><i class="fas fa-eye me-1"></i>8 views</span>
+                                            </div>
+                                            <div class="item-actions">
+                                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                                <button class="btn btn-outline-danger btn-sm">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="item-card-dashboard">
+                                        <div class="item-image">
+                                            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=300&h=200&fit=crop" alt="Leather Bag">
+                                            <div class="item-status swapped">Swapped</div>
+                                        </div>
+                                        <div class="item-content">
+                                            <h5 class="item-title">Vintage Leather Bag</h5>
+                                            <p class="item-description">Authentic leather bag with beautiful patina</p>
+                                            <div class="item-meta">
+                                                <span class="item-points"><i class="fas fa-coins me-1"></i>680 points</span>
+                                                <span class="item-views"><i class="fas fa-eye me-1"></i>45 views</span>
+                                            </div>
+                                            <div class="item-actions">
+                                                <button class="btn btn-outline-secondary btn-sm">View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Swaps Management -->
+                    <div class="dashboard-section mb-5" data-aos="fade-up">
+                        <div class="section-header d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="section-title">Swap Management</h2>
+                            <div class="swap-filters">
+                                <button class="btn btn-outline-primary btn-sm active" data-filter="all">All</button>
+                                <button class="btn btn-outline-warning btn-sm" data-filter="ongoing">Ongoing</button>
+                                <button class="btn btn-outline-success btn-sm" data-filter="completed">Completed</button>
+                            </div>
+                        </div>
+                        <div class="swaps-list">
+                            <div class="swap-item ongoing">
+                                <div class="swap-header">
+                                    <div class="swap-id">#SWP-2024-001</div>
+                                    <div class="swap-status ongoing">In Progress</div>
+                                </div>
+                                <div class="swap-content">
+                                    <div class="swap-items">
+                                        <div class="swap-item-detail">
+                                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=80&h=80&fit=crop" alt="Your Item">
+                                            <div class="item-info">
+                                                <h6>Your Vintage Denim Jacket</h6>
+                                                <span class="points">450 points</span>
+                                            </div>
+                                        </div>
+                                        <div class="swap-arrow">
+                                            <i class="fas fa-exchange-alt"></i>
+                                        </div>
+                                        <div class="swap-item-detail">
+                                            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=80&h=80&fit=crop" alt="Their Item">
+                                            <div class="item-info">
+                                                <h6>Classic Sneakers</h6>
+                                                <span class="points">420 points</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swap-meta">
+                                        <div class="swap-partner">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Partner" class="rounded-circle">
+                                            <span>Mike Chen</span>
+                                        </div>
+                                        <div class="swap-date">Started: 2 days ago</div>
+                                    </div>
+                                    <div class="swap-actions">
+                                        <button class="btn btn-success btn-sm">Accept</button>
+                                        <button class="btn btn-outline-danger btn-sm">Decline</button>
+                                        <button class="btn btn-outline-secondary btn-sm">Message</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swap-item completed">
+                                <div class="swap-header">
+                                    <div class="swap-id">#SWP-2024-002</div>
+                                    <div class="swap-status completed">Completed</div>
+                                </div>
+                                <div class="swap-content">
+                                    <div class="swap-items">
+                                        <div class="swap-item-detail">
+                                            <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=80&h=80&fit=crop" alt="Your Item">
+                                            <div class="item-info">
+                                                <h6>Your Vintage Leather Bag</h6>
+                                                <span class="points">680 points</span>
+                                            </div>
+                                        </div>
+                                        <div class="swap-arrow">
+                                            <i class="fas fa-check text-success"></i>
+                                        </div>
+                                        <div class="swap-item-detail">
+                                            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=80&h=80&fit=crop" alt="Their Item">
+                                            <div class="item-info">
+                                                <h6>Summer Dress</h6>
+                                                <span class="points">320 points</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swap-meta">
+                                        <div class="swap-partner">
+                                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face" alt="Partner" class="rounded-circle">
+                                            <span>Emma Wilson</span>
+                                        </div>
+                                        <div class="swap-date">Completed: 1 week ago</div>
+                                    </div>
+                                    <div class="swap-actions">
+                                        <button class="btn btn-outline-primary btn-sm">Rate Swap</button>
+                                        <button class="btn btn-outline-secondary btn-sm">View Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Points & Rewards -->
+                    <div class="dashboard-section mb-5" data-aos="fade-left">
+                        <div class="section-header mb-4">
+                            <h3 class="section-title">Points & Rewards</h3>
+                        </div>
+                        <div class="points-card">
+                            <div class="points-balance">
+                                <div class="points-number">2,450</div>
+                                <div class="points-label">Total Points</div>
+                            </div>
+                            <div class="points-progress mb-3">
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" style="width: 75%"></div>
+                                </div>
+                                <small class="text-muted">750 points to next level</small>
+                            </div>
+                            <div class="rewards-list">
+                                <div class="reward-item">
+                                    <i class="fas fa-gift text-primary"></i>
+                                    <span>Free shipping on next swap</span>
+                                </div>
+                                <div class="reward-item">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <span>Priority customer support</span>
+                                </div>
+                                <div class="reward-item">
+                                    <i class="fas fa-percentage text-success"></i>
+                                    <span>10% bonus points on swaps</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="dashboard-section mb-5" data-aos="fade-left">
+                        <div class="section-header mb-4">
+                            <h3 class="section-title">Recent Activity</h3>
+                        </div>
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-icon bg-success">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Swap Completed</div>
+                                    <div class="activity-desc">You swapped your leather bag for a summer dress</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-primary">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Item Uploaded</div>
+                                    <div class="activity-desc">Added "Floral Summer Dress" to your items</div>
+                                    <div class="activity-time">1 day ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-warning">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Points Earned</div>
+                                    <div class="activity-desc">+150 points for completing a swap</div>
+                                    <div class="activity-time">3 days ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon bg-info">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Achievement Unlocked</div>
+                                    <div class="activity-desc">Earned "Eco Warrior" badge</div>
+                                    <div class="activity-time">1 week ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats Chart -->
+                    <div class="dashboard-section mb-5" data-aos="fade-left">
+                        <div class="section-header mb-4">
+                            <h3 class="section-title">Monthly Overview</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="monthlyChart" width="300" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Item Modal -->
+    <div class="modal fade" id="uploadItemModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadItemForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Item Name</label>
+                                    <input type="text" class="form-control" placeholder="e.g., Vintage Denim Jacket" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Category</option>
+                                        <option value="tops">Tops</option>
+                                        <option value="bottoms">Bottoms</option>
+                                        <option value="dresses">Dresses</option>
+                                        <option value="outerwear">Outerwear</option>
+                                        <option value="accessories">Accessories</option>
+                                        <option value="shoes">Shoes</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Condition</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Condition</option>
+                                        <option value="excellent">Excellent</option>
+                                        <option value="good">Good</option>
+                                        <option value="fair">Fair</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" rows="3" placeholder="Describe your item..."></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Estimated Value (Points)</label>
+                                    <input type="number" class="form-control" placeholder="e.g., 450" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Upload Photos</label>
+                                    <input type="file" class="form-control" multiple accept="image/*" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="uploadItemForm" class="btn btn-primary">Upload Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" value="Sarah Johnson" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="sarah.johnson@email.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" value="San Francisco, CA">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bio</label>
+                            <textarea class="form-control" rows="3" placeholder="Tell us about yourself..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="editProfileForm" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Find Swap Modal -->
+    <div class="modal fade" id="findSwapModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Find Perfect Swap</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-filters mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Category</label>
+                                <select class="form-select">
+                                    <option value="">All Categories</option>
+                                    <option value="tops">Tops</option>
+                                    <option value="bottoms">Bottoms</option>
+                                    <option value="dresses">Dresses</option>
+                                    <option value="outerwear">Outerwear</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Points Range</label>
+                                <select class="form-select">
+                                    <option value="">Any Points</option>
+                                    <option value="0-200">0-200</option>
+                                    <option value="200-500">200-500</option>
+                                    <option value="500+">500+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-results">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="search-item-card">
+                                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=150&h=150&fit=crop" alt="Item" class="search-item-image">
+                                    <div class="search-item-content">
+                                        <h6>Classic Sneakers</h6>
+                                        <p class="text-muted">420 points</p>
+                                        <button class="btn btn-primary btn-sm">Propose Swap</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="search-item-card">
+                                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=150&h=150&fit=crop" alt="Item" class="search-item-image">
+                                    <div class="search-item-content">
+                                        <h6>Summer Dress</h6>
+                                        <p class="text-muted">320 points</p>
+                                        <button class="btn btn-primary btn-sm">Propose Swap</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
