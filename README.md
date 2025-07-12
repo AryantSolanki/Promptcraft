@@ -4,9 +4,9 @@ Team Member 1:Aryant Solanki
 Email id:solankiar8727@gmail.com
 Team Member 2:Meet Patel
 Email id:meetbpatel06@gmail.com
-Team Member 1:Dhruv Sheth
+Team Member 3:Dhruv Sheth
 Email id:drsheth10@gmail.com
-Team Member 1:Hit Goyani
+Team Member 4:Hit Goyani
 Email id:hitgoyani01@gmail.com
 
 Problem Statement:Develop ReWear, a web-based platform that enables users to exchange unused clothing
