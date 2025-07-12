@@ -1,11 +1,15 @@
 # Promptcraft
 Team Name:Promptcraft
+
 Team Member 1:Aryant Solanki
 Email id:solankiar8727@gmail.com
+
 Team Member 2:Meet Patel
 Email id:meetbpatel06@gmail.com
+
 Team Member 3:Dhruv Sheth
 Email id:drsheth10@gmail.com
+
 Team Member 4:Hit Goyani
 Email id:hitgoyani01@gmail.com
 
